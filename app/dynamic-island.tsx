@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, type Transition } from "framer-motion"
 import { useBatteryMonitor } from "../hooks/useBatteryMonitor"
 import { 
   BellOff, Pause, Play, X, Radio, Circle, Square, 
@@ -12,10 +12,10 @@ import {
 type IslandState = "idle" | "silent" | "music" | "phone" | "lowBattery" | "timer" | "airdrop" | "screenRecord" | "findMy" | "faceId" | "applePay"
 
 // TIGHTENED PHYSICS: Removed the crazy bounce, increased damping to stop the "stretching"
-const islandTransition = { type: "spring", stiffness: 350, damping: 32, mass: 1 }
+const islandTransition: Transition = { type: "spring", stiffness: 350, damping: 32, mass: 1 }
 
 // Smoother fade-in/out for the contents
-const bouncyAnimation = {
+const bouncyAnimation: { initial: any; animate: any; exit: any; transition: Transition } = {
   initial: { opacity: 0, scale: 0.95, filter: "blur(2px)" },
   animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
   exit: { opacity: 0, scale: 0.95, filter: "blur(2px)" },
